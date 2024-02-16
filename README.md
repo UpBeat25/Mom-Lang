@@ -9,7 +9,9 @@ This is because compiler translates the code into C++ code.
 I was able to fit this whole compiler in one file, for now.
 
 Pota Lang is only available for windows but I will be making other verions for it
-
+---
 This is language is still under development.
-Usage:
-'''pota <filename>.pota'''
+> Usage:
+'''python
+pota <filename>.pota'''
+---
