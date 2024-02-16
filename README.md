@@ -11,7 +11,10 @@ To run a Pota Lang file, use: `pota <filename>.pota`
 
 ---
 
-> **Syntax:**
+# Syntax
+
+---
+
 >*print:*
 `print "Hello World!" << "\n"`
 
