@@ -11,7 +11,6 @@ I was able to fit this whole compiler in one file, for now.
 Pota Lang is only available for windows but I will be making other verions for it
 ---
 This is language is still under development.
-> Usage:
-'''python
-pota <filename>.pota'''
+> Usage: <br>
+'pota <filename>.pota'
 ---
