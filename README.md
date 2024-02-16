@@ -12,13 +12,13 @@ To run a Pota Lang file, use: `pota <filename>.pota`
 ---
 
 > **Syntax:**
-*print:*
+>*print:*
 `print "Hello World!" << "\n"`
 
-*variables:*
+>*variables:*
 `var <datatype> <var_name>`
 
-*user input:*
+>*user input:*
 `var <datatype> <var_name>
 read <var_name>
 `
