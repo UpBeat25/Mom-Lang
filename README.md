@@ -1,16 +1,24 @@
 # Pota-Lang
 
-Pota lang is a toy language that was made in 48 hours!
-It was written in Python programming language. Pota Lang has an easy syntax like Python or Kotlin,
-but is as fast as C++!
+Pota Lang is a toy language that was created in just 48 hours! It's written in Python and boasts an easy-to-use syntax reminiscent of Python or Kotlin, yet it's as fast as C++. This speed is achieved through the compiler, which translates the code into C++.
 
-This is because compiler translates the code into C++ code.
+What's remarkable is that the entire compiler fits into just one file, at least for now. Although currently available only for Windows, plans are underway to develop versions for other platforms.
 
-I was able to fit this whole compiler in one file, for now.
+**Note**: This language is still under active development.
 
-Pota Lang is only available for windows but I will be making other verions for it
+> **Usage:**  
+To run a Pota Lang file, use: `pota <filename>.pota`
+
 ---
-This is language is still under development.
-> Usage: <br>
-'pota <filename>.pota'
----
+
+> **Syntax:**
+*print:*
+`print "Hello World!" << "\n"`
+
+*variables:*
+`var <datatype> <var_name>`
+
+*user input:*
+`var <datatype> <var_name>
+read <var_name>
+`
