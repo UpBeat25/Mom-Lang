@@ -1,0 +1,34 @@
+use library
+use_cpp <vector>
+
+print 3 + 2 << "\n"
+
+var int a
+
+var vector<int> f = {4, 6, 1, 7};
+
+f.push_back(9)
+
+read a
+
+print a << "\n"
+
+print myfunc_imported(6)
+
+func myfunc(int ard) -> int {
+    print "hello" << "\n"
+    if (ard > 2) {
+        ret ard
+    }
+    else{
+        ret ard*2
+    }
+}!
+
+print myfunc(1)
+
+var int c
+
+c++
+
+print c
