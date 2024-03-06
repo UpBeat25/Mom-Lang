@@ -4,7 +4,7 @@ Pota Lang is a toy language that was created in just 48 hours! It's written in P
 
 What's remarkable is that the entire compiler fits into just one file, at least for now. This compiler is ready to use on any platform. (Windows, Mac, Linux)
 
-**Note**: This language is still under active development. And plans to transpile the Pota Code into Golang and on their way!!
+**Note**: This language is still under active development. And plans to create a transpiler for Pota Code into Golang are on their way!!
 
 > **Usage:**  
 To run a Pota Lang file, use: `pota <filename>.pota`
