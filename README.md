@@ -2,7 +2,7 @@
 
 Pota Lang is a toy language that was created in just 48 hours! It's written in Python and boasts an easy-to-use syntax reminiscent of Python or Kotlin, yet it's as fast as C++. This speed is achieved through the compiler, which translates the code into C++.
 
-What's remarkable is that the entire compiler fits into just one file, at least for now. Although currently available only for Windows, plans are underway to develop versions for other platforms.
+What's remarkable is that the entire compiler fits into just one file, at least for now. This compiler is ready to use on any platform. (Windows, Mac, Linux)
 
 **Note**: This language is still under active development.
 
