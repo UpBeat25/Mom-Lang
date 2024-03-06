@@ -1,0 +1,9 @@
+func myfunc_imported (int ard) -> int {
+    print "hello" << "\n"
+    if (ard > 2) {
+        ret ard
+    }
+    else{
+        ret ard*5
+    }
+}!
