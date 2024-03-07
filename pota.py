@@ -27,6 +27,7 @@ program = []
 program_func = []
 modules = []
 function = False
+try_number = 1
 for line in program_lines:
     parts = line.split(" ")
     opcode = parts[0]
@@ -35,15 +36,15 @@ for line in program_lines:
         continue
 
     elif opcode == 'print':
-        text = line.replace("print", "")
+        text = line.replace("print ", "")
         pro.append(F"fmt.Println({text})")
     
     elif opcode == 'printf':
-        text = line.replace("printf", "")
+        text = line.replace("printf ", "")
         pro.append(F"fmt.Printf({text})")
 
     elif opcode == 'read':
-        text = line.replace("read", "")
+        text = line.replace("read ", "")
         pro.append(F"fmt.Scan(&{text})")
 
     elif opcode == 'if':
@@ -59,12 +60,12 @@ for line in program_lines:
     elif opcode == 'for':
         pro.append(line)
 
-    elif opcode == 'try {':
-        pro.append("try := func() {")
+    elif opcode == 'try':
+        pro.append(F"try{try_number} := func() error" + "{")
     
-    elif opcode == 'error':
-        pro.append("return nil")
-        pro.append("if err := try(); err != nil{")
+    elif opcode == 'catch':
+        pro.append(F"if err := try{try_number}(); err != nil" + "{")
+        try_number += 1
 
     elif opcode == 'elif':
         text = line.replace("elif", "else if")
@@ -74,6 +75,9 @@ for line in program_lines:
         text = line.replace("=", ":=").replace("var ", "")
         pro.append(text)
 
+    elif opcode == 'let':
+        text = line.replace("let", "var")
+        pro.append(text)
 
     elif opcode == 'func':
         text = line.replace("->", "")
