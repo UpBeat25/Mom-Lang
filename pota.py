@@ -7,11 +7,18 @@ def load_module(module_name):
     with open(module_file, "r") as f:
         return f.readlines()
 
+build = False
 if len(sys.argv) != 2:
-    print("Useage:> pota <filename>.pota")
+    print("Usage:> pota <filename>.pota")
     sys.exit()
 else:
-    program_file = sys.argv[1]
+    if sys.argv[1] == 'install':
+        pass
+    elif sys.argv[1] == 'build':
+        build = True
+        program_file = sys.argv[2]
+    else:
+        program_file = sys.argv[1]
 
 program_lines = []
 with open(program_file, "r") as f:
@@ -30,11 +37,15 @@ for line in program_lines:
 
     elif opcode == 'print':
         text = line.replace("print", "")
+        pro.append(F"fmt.Println({text})")
+    
+    elif opcode == 'printf':
+        text = line.replace("printf", "")
         pro.append(F"fmt.Printf({text})")
 
     elif opcode == 'read':
         text = line.replace("read", "")
-        pro.append(F"fmt.Scan({text})")
+        pro.append(F"fmt.Scan(&{text})")
 
     elif opcode == 'if':
         pro.append(line)
@@ -50,33 +61,24 @@ for line in program_lines:
         pro.append(line)
 
     elif opcode == 'try {':
-        function = True
         pro.append("try := func() {")
     
     elif opcode == 'error':
         pro.append("return nil")
-        function = True
         pro.append("if err := try(); err != nil{")
-
-    elif opcode == '{' or opcode == '}':
-        pro.append(opcode)
 
     elif opcode == 'elif':
         text = line.replace("elif", "else if")
         pro.append(text)
 
-    elif opcode == 'else' or opcode == 'else{':
-        pro.append(line)
-
     elif opcode == 'var':
-        text = line.replace("=", ":=")
+        text = line.replace("=", ":=").replace("var ", "")
         pro.append(text)
 
 
     elif opcode == 'func':
+        text = line.replace("->", "")
         function = True
-        text = line.replace("func ", line.rsplit("-> ")[1].replace(" {", " "))
-        text = re.sub(r"->.*{$", "{", text)
         pro.append(text)
 
     elif opcode == '}!':
@@ -99,7 +101,7 @@ for line in program_lines:
         module_name = line.replace("use_go ", "")
         modules.append(module_name)
     else:
-        pro.append(line + ";")
+        pro.append(line)
 
     if function:
         program_func.extend(pro)
@@ -107,23 +109,27 @@ for line in program_lines:
         program.extend(pro)
 
 go_file = program_file[:-5] + ".go"
-os.system(f"go mod init {program_file[:-5]}")
+if not os.path.exists("go.mod"):
+    os.system(f"go mod init {program_file[:-5]}")
 out = open(go_file, 'w')
-out.write(f"package main\nimport(\n\"fmt\"")
+out.write(f"package {program_file[:-5]}\nimport(\n\"fmt\"\n")
 for i in modules:
     out.write(F"\"{i}\"\n")
 out.write(f"\n)\n")
 
 for i in program_func:
-    out.write(i)
+    out.write(i + "\n")
 
 out.write("func main(){")
 
 for i in program:
-    out.write(f"\"{i}\"")
+    out.write(f"{i}\n")
 
 out.write("}")
 out.close()
 
-os.system(F"go build -o {go_file}.exe")
-# os.remove(go_file)
+if build is True:
+    os.system(F"go build -o {program_file[:-5]}.exe")
+    os.remove(go_file)
+else:
+    os.system(F"go run {go_file}")
