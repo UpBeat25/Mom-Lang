@@ -1,21 +1,17 @@
 use library
-use_cpp <vector>
+use_go time // this code hasn't been used
 
-print 3 + 2 << "\n"
+print 3 + 2 + "\n"
 
 var int a
 
-var vector<int> f = {4, 6, 1, 7};
-
-f.push_back(9)
-
 read a
 
-print a << "\n"
+print a + "\n"
 
 print myfunc_imported(6)
 
-func myfunc(int ard) -> int {
+func myfunc(int ard){
     print "hello" << "\n"
     if (ard > 2) {
         ret ard
