@@ -30,11 +30,11 @@ for line in program_lines:
 
     elif opcode == 'print':
         text = line.replace("print", "")
-        pro.append(F"cout <<{text};")
+        pro.append(F"fmt.Printf({text})")
 
     elif opcode == 'read':
         text = line.replace("read", "")
-        pro.append(F"cin >>{text};")
+        pro.append(F"fmt.Scan({text})")
 
     elif opcode == 'if':
         pro.append(line)
@@ -42,13 +42,21 @@ for line in program_lines:
     elif opcode == 'while':
         pro.append(line)
 
-    elif opcode == 'try':
+    elif opcode == 'foreach':
+        text = line.replace("in", ":=")
+        pro.append(text)
+
+    elif opcode == 'for':
+        pro.append(line)
+
+    elif opcode == 'try {':
         function = True
-        pro.append(opcode)
+        pro.append("try := func() {")
     
-    elif opcode == 'except':
+    elif opcode == 'error':
+        pro.append("return nil")
         function = True
-        pro.append("catch () {")
+        pro.append("if err := try(); err != nil{")
 
     elif opcode == '{' or opcode == '}':
         pro.append(opcode)
@@ -61,8 +69,8 @@ for line in program_lines:
         pro.append(line)
 
     elif opcode == 'var':
-        text = line.replace("var ", "")
-        pro.append(text + ";")
+        text = line.replace("=", ":=")
+        pro.append(text)
 
 
     elif opcode == 'func':
@@ -87,9 +95,9 @@ for line in program_lines:
     elif opcode == 'use':
         module_name = line.replace("use ", "")
         program_lines = program_lines.extend([line.strip() for line in load_module(module_name)])
-    elif opcode == 'use_cpp':
-        module_name = line.replace("use_cpp ", "")
-        modules.append(F"#include {module_name}")
+    elif opcode == 'use_go':
+        module_name = line.replace("use_go ", "")
+        modules.append(module_name)
     else:
         pro.append(line + ";")
 
@@ -98,22 +106,24 @@ for line in program_lines:
     else:
         program.extend(pro)
 
-cpp_file = program_file[:-5] + ".cpp"
-out = open(cpp_file, 'w')
-out.write(f"#include <iostream>\n")
+go_file = program_file[:-5] + ".go"
+os.system(f"go mod init {program_file[:-5]}")
+out = open(go_file, 'w')
+out.write(f"package main\nimport(\n\"fmt\"")
 for i in modules:
-    out.write(F"{i}\n")
-out.write("using namespace std;\n")
+    out.write(F"\"{i}\"\n")
+out.write(f"\n)\n")
+
 for i in program_func:
     out.write(i)
 
-out.write("int main(){")
+out.write("func main(){")
 
 for i in program:
-    out.write(i)
+    out.write(f"\"{i}\"")
 
-out.write("return 0;}")
+out.write("}")
 out.close()
 
-os.system(F"g++ {cpp_file} -o main.exe")
-# os.remove(cpp_file) # remove the '#' to delete the c++ source file aswell
+os.system(F"go build -o {go_file}.exe")
+# os.remove(go_file)
