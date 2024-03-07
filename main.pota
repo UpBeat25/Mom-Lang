@@ -1,29 +1,26 @@
 use library
-use_go <vector>
+print 3 + 2
 
-print 3 + 2 + "\n"
-
-var int a
+var a = " "
 
 read a
 
-print a + "\n"
+print a
 
 print myfunc_imported(6)
 
-func myfunc(ard int){
-    print "hello" << "\n"
+func myfunc(ard int) -> int{
+    print "hello"
     if (ard > 2) {
         ret ard
-    }
-    else{
+    } else{
         ret ard*2
     }
 }!
 
 print myfunc(1)
 
-var int c
+var c = 0
 
 c++
 
