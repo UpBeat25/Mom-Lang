@@ -10,6 +10,8 @@ What's remarkable is that the entire compiler fits into just one file, at least 
 
 > **Usage:**  
 To run a Pota Lang file, use: `pota <filename>.pota`
+> To Build it into an executable
+use: `pota build <filename>.pota`
 
 ---
 
@@ -18,12 +20,12 @@ To run a Pota Lang file, use: `pota <filename>.pota`
 ---
 
 >*print:*
-`print "Hello World!" << "\n"`
+`print "Hello World!"`
 
 >*variables:*
-`var <datatype> <var_name>`
+`var <var_name> <datatype>`
 
 >*user input:*
-`var <datatype> <var_name>
+`var <var_name> <datatype>
 read <var_name>
 `
