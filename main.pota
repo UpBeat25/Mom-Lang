@@ -1,5 +1,5 @@
 use library
-use_go time // this code hasn't been used
+use_go <vector>
 
 print 3 + 2 + "\n"
 
@@ -11,7 +11,7 @@ print a + "\n"
 
 print myfunc_imported(6)
 
-func myfunc(int ard){
+func myfunc(ard int){
     print "hello" << "\n"
     if (ard > 2) {
         ret ard
