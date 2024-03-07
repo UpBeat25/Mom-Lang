@@ -1,9 +1,8 @@
-func myfunc_imported (ard int){
-    print "hello" + "\n"
+func myfunc_imported (ard int) -> int{
+    print "hello"
     if (ard > 2) {
         ret ard
-    }
-    else{
+    } else {
         ret ard*5
     }
 }!
