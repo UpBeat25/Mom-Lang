@@ -1,6 +1,5 @@
 import sys
 import os
-import re
 
 def load_module(module_name):
     module_file = module_name + ".pota"
