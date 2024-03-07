@@ -1,4 +1,4 @@
-# Pota-Lang
+#                                                     Pota-Lang
 
 ![potalang](https://github.com/UpBeat25/Pota-Lang/blob/main/Potalang.png)
 
